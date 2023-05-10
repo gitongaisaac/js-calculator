@@ -1,0 +1,156 @@
+:root {
+  --grey-100: #f8fafc;
+  --grey-200: #f1f5f9;
+  --grey-300: #e2e8f0;
+  --grey-400: #cbd5e1;
+  --grey-500: #94a3b8;
+  --grey-600: #64748b;
+  --grey-700: #475569;
+  --grey-800: #344256;
+  --grey-900: #1e293b;
+
+  --primary-100: #cde4fb;
+  --primary-200: #9bcaf8;
+  --primary-300: #68aff4;
+  --primary-400: #3695f1;
+  --primary-500: #047aed;
+  --primary-600: #0362be;
+  --primary-700: #02498e;
+  --primary-800: #02315f;
+  --primary-900: #01182f;
+
+  --complement-10: #fbfbfb;
+  --complement-20: #f8f6f7;
+  --complement-30: #f4f2f3;
+  --complement-40: #f0edef;
+  --complement-50: #ede9ec;
+  --complement-60: #e9e4e8;
+  --complement-70: #e5e0e4;
+  --complement-80: #e1dbe0;
+  --complement-90: #ded7dc;
+  --complement-100: #dad2d8;
+  --complement-200: #c4bdc2;
+  --complement-300: #aea8ad;
+  --complement-400: #999397;
+  --complement-500: #837e82;
+  --complement-600: #6d696c;
+  --complement-700: #575456;
+  --complement-800: #413f41;
+  --complement-900: #2c2a2b;
+
+  --dark-color: #000000;
+  --light-color: #ffffff;
+  --btn-color: #abadaf;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--grey-100);
+}
+
+button {
+  display: block;
+  border: none;
+  font-size: 18px;
+  color: var(--grey-800);
+}
+
+input {
+  outline: none;
+  border: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0;
+  margin: 0;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.calculator {
+  max-width: fit-content;
+  margin: auto;
+  margin-top: 100px;
+  padding: 20px;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--light-color);
+  border: 1px solid var(--grey-400);
+  border-radius: 8px;
+  padding: 7px;
+  text-align: end;
+}
+
+.screen input {
+  font-weight: 300;
+  font-size: 20px;
+  text-align: end;
+}
+
+.screen h2 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.calc {
+  padding-bottom: 2.5px;
+}
+
+#ans {
+  padding-top: 2.5px;
+}
+
+.btn {
+  background-color: var(--btn-color);
+  height: 35px;
+  width: 80px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.num {
+  background-color: var(--grey-300);
+}
+
+.equals {
+  background-color: var(--primary-500);
+  color: var(--light-color);
+}
+
+.buttons {
+  margin-top: 30px;
+  font-size: 30px;
+}
+
+.operand {
+  font-size: 25px;
+}
+
+.align.grid {
+  display: grid;
+  gap: 15px;
+}
+
+.angle {
+  background-color: var(--complement-40);
+  border-radius: 5px;
+}
