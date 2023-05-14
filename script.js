@@ -15,17 +15,15 @@ class Screen {
 
       if (!e.target.classList.contains("pull")) {
         values.push(input);
+
         problem = document.getElementById("ans").value = values[0];
         for (let i = 1; i < values.length; i++) {
           document.getElementById("ans").value = problem += values[i];
         }
       }
 
-      console.log(values);
-
       if (e.target.classList.contains("equals")) {
-        // Op.append();
-        Op.chain();
+        Calculations.bracket();
       }
     }
   }
@@ -66,53 +64,66 @@ class Op {
   }
 
   static chain() {
-    let signs = [];
-    let leftHands = [];
     let problem = values[0];
 
-    let noOfSigns = 0;
-    for (let i = 0; i < values.length; i++) {
-      problem += problem[i + 1];
-
-      for (let j = 0; j < operands.length; j++) {
-        if (values[i] == operands[j].innerText) {
-          signs.push(values[i]);
-
-          for (let k = 0; k < signs.length; k++) {
-            console.log(signs[k]);
-          }
-          const hasdivision = operands[j].classList.contains("divide");
-          const hasMultiply = operands[j].classList.contains("multiply");
-          const hasAddition = operands[j].classList.contains("plus");
-          const hadSubtraction = operands[j].classList.contains("minus");
-
-          // if (operands[j].classList.contains("divide")) {
-          //   Calculations.division();
-          // } else if (operands[j].classList.contains("multiply")) {
-          //   Calculations.multiplication();
-          // } else if (operands[j].classList.contains("plus")) {
-          //   Calculations.addition();
-          // } else {
-          //   Calculations.subtraction();
-          // }
-        }
-      }
+    for (let i = 1; i < values.length; i++) {
+      problem += values[i];
     }
 
     // console.log(problem);
 
-    for (let k = 0; k < signs.length; k++) {
-      noOfSigns++;
+    Calculations.bracket();
+  }
 
-      let names = "left" + k;
-      leftHands.push(names);
+  static createProblem() {
+    let problem = values[0];
 
-      // console.log(signs[k]);
+    for (let i = 1; i < values.length; i++) {
+      problem += values[i];
     }
   }
 }
 
 class Calculations {
+  static bracket() {
+    console.log(values);
+
+    let lastIndexOfsign, lastIndexOfbr, noOfOpen, noOfClosed;
+    noOfOpen = 0;
+    noOfClosed = 0;
+    for (let i = 0; i < values.length; i++) {
+      if (values[i] === "(") {
+        noOfOpen++;
+
+        const indexOfbr = values.indexOf(values[i]);
+
+        for (let j = 0; j < indexOfbr; j++) {
+          for (let k = 0; k < operands.length; k++) {
+            if (values[j] === operands[k].innerText) {
+              // console.log(indexOfbr);
+              lastIndexOfsign = values.lastIndexOf(values[j]);
+              console.log(lastIndexOfsign);
+            }
+          }
+        }
+      }
+
+      if (values[i] === ")") {
+        noOfClosed++;
+        // console.log(values.lastIndexOf(values[i]));
+      }
+
+      if (noOfOpen === noOfClosed) {
+        console.log(values.lastIndexOf(values[i]));
+        console.log(noOfOpen);
+        break;
+      }
+    }
+
+    console.log(noOfOpen);
+    console.log(noOfClosed);
+  }
+
   static division() {
     console.log("Division");
   }
