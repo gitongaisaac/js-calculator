@@ -29,7 +29,7 @@ const click = (e) => {
 };
 // }
 
-button.addEventListener("click", click());
+button.addEventListener("click", click);
 
 // class Op {
 const append = () => {
@@ -81,16 +81,16 @@ const bracket = () => {
 
   let lastIndexOfsign, lastIndexOfbr, noOfOpen, noOfClosed;
 
-  noOfOpen = 0;
+  noOfOpen = lastIndexOfsign = 0;
   noOfClosed = 0;
 
   for (let i = 0; i < values.length; i++) {
     if (values[i] === "(") {
       noOfOpen++;
 
-      const indexOfbr = values.indexOf(values[i]);
+      const indexOfOpenbr = values.indexOf(values[i]);
 
-      for (let j = 0; j < indexOfbr; j++) {
+      for (let j = 0; j < indexOfOpenbr; j++) {
         for (let k = 0; k < operands.length; k++) {
           if (values[j] === operands[k].innerText) {
             lastIndexOfsign = values.lastIndexOf(values[j]);
@@ -102,11 +102,19 @@ const bracket = () => {
 
     if (values[i] === ")") {
       noOfClosed++;
-      // console.log(values.lastIndexOf(values[i]));
+      console.log(values[i]);
     }
 
     if (noOfClosed === noOfOpen) {
-      console.log("close parenthisis");
+      const indexOfClosebr = values.indexOf(values[i]);
+
+      if (lastIndexOfsign === 0) {
+        // const newValues = values.slice(0, indexOfClosebr + 1);
+        // console.log(newValues);
+      } else {
+        // const newValues = values.slice(lastIndexOfsign + 1, indexOfClosebr);
+        // console.log(newValues);
+      }
     }
   }
 
