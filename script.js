@@ -1,10 +1,21 @@
+/* Access the buttons on the html file */
 const button = document.querySelector(".buttons");
+
+/* Access the signs of operation (×, +, −, ÷) */
 const operands = document.querySelectorAll(".operand");
 
+/*
+ * =============================================================================================
+ */
+/* Stores the elements pressed on the calculator interface */
 const values = [];
 
-// class Screen {
+/*
+ * =============================================================================================
+ */
+/* This function is passed to the event listener, takes the events target inner text and appends it to the array above (values) */
 const click = (e) => {
+  /* Check if the events target has a class of btn */
   if (e.target.classList.contains("btn")) {
     const input = e.target.innerText;
 
@@ -13,6 +24,8 @@ const click = (e) => {
       // values.push(" ", e.target.innerText, " ");
     }
 
+    /* Prevents the push of values that are not to be performed calculations on such as the equal sighn.
+     * This values have a class of pull */
     if (!e.target.classList.contains("pull")) {
       values.push(input);
 
@@ -22,119 +35,121 @@ const click = (e) => {
       }
     }
 
+    /* Calls the bracket_indetifier function to start the calculations after the equls sign is hit */
     if (e.target.classList.contains("equals")) {
-      bracket();
+      bracket_identifier();
     }
   }
 };
-// }
 
+/*
+ * =============================================================================================
+ */
+/* An event listener listens to a click event */
 button.addEventListener("click", click);
 
-// class Op {
-const append = () => {
-  let left, right, problem;
+/*
+ * =============================================================================================
+ */
+/* Assigns which function the values should go to, whether bracket_identifier, multiplication, divsion, addition or subtraction.
+ * If follows the rules of mathematical order of operations, e.g, bracket elements are to be worked out first, then division, multiplication
+ * addition and finally subtraction */
+const operation_assigner = () => {};
 
-  const indexOfEquals = values.indexOf("=");
+/* Slices the array to the required operation */
+const problem_slicer = () => {};
 
-  let indexOfOperand;
-  left = problem = values[0];
-  for (let i = 1; i < values.length; i++) {
-    problem += problem;
+/* Converts the sliced array from string form */
+const problem_converter = () => {};
 
-    for (let j = 0; j < operands.length; j++) {
-      if (values[i] === operands[j].innerText) {
-        indexOfOperand = values.indexOf(values[i]);
-      }
-    }
-  }
-
-  for (let i = 1; i < indexOfOperand; i++) {
-    left += values[i];
-  }
-
-  right = values[indexOfOperand + 1];
-  for (let i = indexOfOperand + 2; i < indexOfEquals; i++) {
-    right += values[i];
-  }
-
-  console.log(problem);
-  console.log(left);
-  console.log(right);
-};
-
-const createProblem = () => {
-  let problem = values[0];
-
-  for (let i = 1; i < values.length; i++) {
-    problem += values[i];
-  }
-};
-// }
-
-// class Calculations {
-
-const bracketSlicer = () => {};
-
-const bracket = () => {
+/*
+ * =============================================================================================
+ */
+/* This function identifies brackets and slices the innermost first set of brackets to form a new one */
+const bracket_identifier = () => {
   console.log(values);
 
-  let lastIndexOfsign, lastIndexOfbr, noOfOpen, noOfClosed;
+  let indexOfClose, indexOfOpen;
 
-  noOfOpen = lastIndexOfsign = 0;
-  noOfClosed = 0;
-
+  /* Loops form the start of array and identify the first close bracket saves its index as indexOfClose and breaks the loop */
   for (let i = 0; i < values.length; i++) {
-    if (values[i] === "(") {
-      noOfOpen++;
-
-      const indexOfOpenbr = values.indexOf(values[i]);
-
-      for (let j = 0; j < indexOfOpenbr; j++) {
-        for (let k = 0; k < operands.length; k++) {
-          if (values[j] === operands[k].innerText) {
-            lastIndexOfsign = values.lastIndexOf(values[j]);
-            console.log(lastIndexOfsign);
-          }
-        }
-      }
-    }
-
     if (values[i] === ")") {
-      noOfClosed++;
-      console.log(values[i]);
-    }
-
-    if (noOfClosed === noOfOpen) {
-      const indexOfClosebr = values.indexOf(values[i]);
-
-      if (lastIndexOfsign === 0) {
-        // const newValues = values.slice(0, indexOfClosebr + 1);
-        // console.log(newValues);
-      } else {
-        // const newValues = values.slice(lastIndexOfsign + 1, indexOfClosebr);
-        // console.log(newValues);
-      }
+      indexOfClose = values.indexOf(values[i]);
+      break;
     }
   }
 
-  console.log(noOfOpen);
-  console.log(noOfClosed);
+  /* Loops the array from indexOfClose (loops in reverse), identifies the last Index Of open bracket,
+   * saves it as indexOfOpen and breaks the loop */
+  for (let i = indexOfClose; i >= 0; i--) {
+    if (values[i] === "(") {
+      indexOfOpen = values.lastIndexOf(values[i]);
+      break;
+    }
+  }
+
+  /* Loops the array from indexOfOpen (loops in reverse): to find out if there were any elements to be multiplied by the contents in the
+   * bracket, finds the first sign of operation from indexOfOpen and slices the elements from that sign to indexOfOpen */
+  let indexOfSign;
+  for (let i = indexOfOpen - 1; i >= 0; i--) {
+    if (
+      values[i] === "÷" ||
+      values[i] === "+" ||
+      values[i] === "×" ||
+      values[i] === "−"
+    ) {
+      indexOfSign = values.lastIndexOf(values[i]);
+      console.log(indexOfSign);
+      console.log(values[i]);
+      break;
+    }
+  }
+
+  /* Digits on the left of the open bracket until the fist symbol of operation */
+  const outer_digits = values.slice(indexOfSign + 1, indexOfOpen);
+
+  /* Checks if the length of the outer_digits array is 0, if yes, the it pushes a 1 in string form else nothing happens */
+  if (outer_digits.length === 0) {
+    outer_digits.push("1");
+  } else {
+    console.log(false);
+  }
+
+  /* Values in the inner bracket */
+  const new_values = values.slice(indexOfOpen + 1, indexOfClose);
+
+  console.log(outer_digits);
+  console.log(new_values);
 };
 
+/*
+ * =============================================================================================
+ */
+/* Handles Division */
 const division = () => {
   console.log("Division");
 };
 
+/*
+ * =============================================================================================
+ */
+/* Handles multiplication */
 const multiplication = () => {
   console.log("multiplication");
 };
 
+/*
+ * =============================================================================================
+ */
+/* Handles addition */
 const addition = () => {
   console.log("Addition");
 };
 
+/*
+ * =============================================================================================
+ */
+/* Handles subtraction */
 const subtraction = () => {
   console.log("Subtraction");
 };
-// }
