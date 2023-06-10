@@ -37,7 +37,7 @@ const click = (e) => {
 
     /* Calls the bracket_indetifier function to start the calculations after the equls sign is hit */
     if (e.target.classList.contains("equals")) {
-      bracket_identifier();
+      operation_assigner();
     }
   }
 };
@@ -54,19 +54,51 @@ button.addEventListener("click", click);
 /* Assigns which function the values should go to, whether bracket_identifier, multiplication, divsion, addition or subtraction.
  * If follows the rules of mathematical order of operations, e.g, bracket elements are to be worked out first, then division, multiplication
  * addition and finally subtraction */
-const operation_assigner = () => {};
+const operation_assigner = () => {
+  for (let i = 0; i < values.length; i++) {
+    if (values[i] === "(") {
+      bracket_slicer();
+      break;
+    }
+  }
+};
 
+/*
+ * =============================================================================================
+ */
 /* Slices the array to the required operation */
-const problem_slicer = () => {};
+const operation_slicer = (problem) => {
+  const symbols = ["+", "÷", "×", "−"];
+  console.log(problem);
 
+  for (let i = 0; i < problem.length; i++) {
+    symbols.forEach((symbol) => {
+      if (symbol === problem[i]) {
+        console.log(true);
+        console.log(problem[i]);
+      } else {
+        console.log(false);
+      }
+    });
+  }
+};
+
+/*
+ * =============================================================================================
+ */
 /* Converts the sliced array from string form */
-const problem_converter = () => {};
+const operation_converter = (problem) => {
+  if (typeof problem[0] === "string") {
+    console.log(problem);
+  } else {
+  }
+};
 
 /*
  * =============================================================================================
  */
 /* This function identifies brackets and slices the innermost first set of brackets to form a new one */
-const bracket_identifier = () => {
+const bracket_slicer = () => {
   console.log(values);
 
   let indexOfClose, indexOfOpen;
@@ -99,27 +131,36 @@ const bracket_identifier = () => {
       values[i] === "−"
     ) {
       indexOfSign = values.lastIndexOf(values[i]);
-      console.log(indexOfSign);
-      console.log(values[i]);
       break;
     }
   }
 
   /* Digits on the left of the open bracket until the fist symbol of operation */
-  const outer_digits = values.slice(indexOfSign + 1, indexOfOpen);
+  const outerDigits = values.slice(indexOfSign + 1, indexOfOpen);
 
-  /* Checks if the length of the outer_digits array is 0, if yes, the it pushes a 1 in string form else nothing happens */
-  if (outer_digits.length === 0) {
-    outer_digits.push("1");
+  /* Checks if the length of the outerDigits array is 0, if yes, the it pushes a 1 in string form else nothing happens */
+  if (outerDigits.length === 0) {
+    outerDigits.push("1");
   } else {
     console.log(false);
   }
 
   /* Values in the inner bracket */
-  const new_values = values.slice(indexOfOpen + 1, indexOfClose);
+  const newValues = values.slice(indexOfOpen + 1, indexOfClose);
 
-  console.log(outer_digits);
-  console.log(new_values);
+  // console.log(outerDigits);
+  // console.log(newValues);
+
+  bracket_operations(newValues, outerDigits);
+};
+
+/*
+ * =============================================================================================
+ */
+/* Does calculations on the elements in the bracket, it accepts two parameters passed from the bracket_slicer()
+ * function, the new values and the outer digits of the bracket */
+const bracket_operations = (problem, outerDigits) => {
+  operation_slicer(problem);
 };
 
 /*
