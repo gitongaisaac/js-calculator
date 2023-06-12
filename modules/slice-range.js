@@ -1,5 +1,5 @@
 /* Returns the index where the slice should start. Accepts 6 parameters */
-const slice_start = (start, end, problemAti, sign1, sign2, sign3) => {
+const sliceStart = (start, end, problemAti, sign1, sign2, sign3) => {
   let indexOfStart;
 
   for (let i = start; i >= end; i--) {
@@ -22,7 +22,7 @@ const slice_start = (start, end, problemAti, sign1, sign2, sign3) => {
  * =============================================================================================
  */
 /* Returns the index where the slice should end accepts 6 parameters  */
-const slice_end = (start, end, problemAti, sign1, sign2, sign3) => {
+const sliceEnd = (start, end, problemAti, sign1, sign2, sign3) => {
   let indexOfEnd;
 
   for (let i = start; i < end; i++) {
@@ -40,3 +40,5 @@ const slice_end = (start, end, problemAti, sign1, sign2, sign3) => {
 
   return indexOfEnd;
 };
+
+export { sliceStart, sliceEnd };

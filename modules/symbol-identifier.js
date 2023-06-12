@@ -1,6 +1,9 @@
+/* import modules */
+import { sliceStart, sliceEnd } from "./slice-range";
+
 /* identifies the divide sign and returns the slice start and slice end of the operation containing the divide sign.
- * Accepts 1 parameter and implements the functions slice_start and slice_end to return the slice start and slice end */
-const divide_symbol_identifier = (problem) => {
+ * Accepts 1 parameter and implements the functions sliceStart and sliceEnd to return the slice start and slice end */
+const divideSymbolIdentifier = (problem) => {
   let indexOfDivide, indexOfStart, indexOfEnd;
 
   for (let i = 0; i < problem.length; i++) {
@@ -10,8 +13,8 @@ const divide_symbol_identifier = (problem) => {
     }
   }
 
-  indexOfStart = slice_start(indexOfDivide, 0, problem, "×", "+", "−");
-  indexOfEnd = slice_end(indexOfDivide, problem.length, problem, "×", "+", "−");
+  indexOfStart = sliceStart(indexOfDivide, 0, problem, "×", "+", "−");
+  indexOfEnd = sliceEnd(indexOfDivide, problem.length, problem, "×", "+", "−");
 
   return [indexOfStart, indexOfEnd];
 };
@@ -20,8 +23,8 @@ const divide_symbol_identifier = (problem) => {
  * =============================================================================================
  */
 /* identifies the multiplication sign and returns the slice start and slice end of the operation containing the multiplication sign.
- * Accepts 1 parameter and implements the functions slice_start and slice_end to return the slice start and slice end */
-const multiply_symbol_identifier = (problem) => {
+ * Accepts 1 parameter and implements the functions sliceStart and sliceEnd to return the slice start and slice end */
+const multiplySymbolIdentifier = (problem) => {
   let indexOfMultiply, indexOfStart, indexOfEnd;
 
   for (let i = 0; i < problem.length; i++) {
@@ -31,8 +34,8 @@ const multiply_symbol_identifier = (problem) => {
     }
   }
 
-  indexOfStart = slice_start(indexOfMultiply, 0, problem, "÷", "+", "−");
-  indexOfEnd = slice_end(
+  indexOfStart = sliceStart(indexOfMultiply, 0, problem, "÷", "+", "−");
+  indexOfEnd = sliceEnd(
     indexOfMultiply,
     problem.length,
     problem,
@@ -48,8 +51,8 @@ const multiply_symbol_identifier = (problem) => {
  * =============================================================================================
  */
 /* identifies the addition sign and returns the slice start and slice end of the operation containing the addition sign.
- * Accepts 1 parameter and implements the functions slice_start and slice_end to return the slice start and slice end */
-const add_symbol_indetifier = (problem) => {
+ * Accepts 1 parameter and implements the functions sliceStart and sliceEnd to return the slice start and slice end */
+const addSymbolIndetifier = (problem) => {
   let indexOfAdd, indexOfStart, indexOfEnd;
 
   for (let i = 0; i < problem.length; i++) {
@@ -59,8 +62,8 @@ const add_symbol_indetifier = (problem) => {
     }
   }
 
-  indexOfStart = slice_start(indexOfAdd, 0, problem, "÷", "×", "−");
-  indexOfEnd = slice_end(indexOfAdd, problem.length, problem, "÷", "×", "−");
+  indexOfStart = sliceStart(indexOfAdd, 0, problem, "÷", "×", "−");
+  indexOfEnd = sliceEnd(indexOfAdd, problem.length, problem, "÷", "×", "−");
 
   return [indexOfStart, indexOfEnd];
 };
@@ -69,8 +72,8 @@ const add_symbol_indetifier = (problem) => {
  * =============================================================================================
  */
 /* identifies the subtraction sign and returns the slice start and slice end of the operation containing the subtraction sign.
- * Accepts 1 parameter and implements the functions slice_start and slice_end to return the slice start and slice end */
-const subtract_symbol_identifier = (problem) => {
+ * Accepts 1 parameter and implements the functions sliceStart and sliceEnd to return the slice start and slice end */
+const subtractSymbolIdentifier = (problem) => {
   let indexOfAdd, indexOfStart, indexOfEnd;
 
   for (let i = 0; i < problem.length; i++) {
@@ -80,8 +83,15 @@ const subtract_symbol_identifier = (problem) => {
     }
   }
 
-  indexOfStart = slice_start(indexOfAdd, 0, problem, "÷", "×", "+");
-  indexOfEnd = slice_end(indexOfAdd, problem.length, problem, "÷", "×", "+");
+  indexOfStart = sliceStart(indexOfAdd, 0, problem, "÷", "×", "+");
+  indexOfEnd = sliceEnd(indexOfAdd, problem.length, problem, "÷", "×", "+");
 
   return [indexOfStart, indexOfEnd];
+};
+
+export {
+  divideSymbolIdentifier,
+  multiplySymbolIdentifier,
+  addSymbolIndetifier,
+  subtractSymbolIdentifier,
 };

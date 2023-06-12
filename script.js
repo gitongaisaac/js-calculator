@@ -1,3 +1,11 @@
+/* Import modules */
+import {
+  divideSymbolIdentifier,
+  multiplySymbolIdentifier,
+  addSymbolIndetifier,
+  subtractSymbolIdentifier,
+} from "./modules/symbol-identifier";
+
 /* Access the buttons on the html file */
 const button = document.querySelector(".buttons");
 
