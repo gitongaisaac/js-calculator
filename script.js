@@ -66,6 +66,12 @@ const operation_assigner = () => {
 /*
  * =============================================================================================
  */
+/* Identifies the appropriate symbol of operation according to the rules of mathematical order of operations */
+const symbol_identifier = (problem) => {};
+
+/*
+ * =============================================================================================
+ */
 /* Slices the array to the required operation */
 const operation_slicer = (problem) => {
   const symbols = ["+", "÷", "×", "−"];
