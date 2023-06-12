@@ -66,32 +66,6 @@ const operation_assigner = () => {
 /*
  * =============================================================================================
  */
-/* Identifies the appropriate symbol of operation according to the rules of mathematical order of operations */
-const symbol_identifier = (problem) => {};
-
-/*
- * =============================================================================================
- */
-/* Slices the array to the required operation */
-const operation_slicer = (problem) => {
-  const symbols = ["+", "÷", "×", "−"];
-  console.log(problem);
-
-  for (let i = 0; i < problem.length; i++) {
-    symbols.forEach((symbol) => {
-      if (symbol === problem[i]) {
-        console.log(true);
-        console.log(problem[i]);
-      } else {
-        console.log(false);
-      }
-    });
-  }
-};
-
-/*
- * =============================================================================================
- */
 /* Converts the sliced array from string form */
 const operation_converter = (problem) => {
   if (typeof problem[0] === "string") {
@@ -167,36 +141,4 @@ const bracket_slicer = () => {
  * function, the new values and the outer digits of the bracket */
 const bracket_operations = (problem, outerDigits) => {
   operation_slicer(problem);
-};
-
-/*
- * =============================================================================================
- */
-/* Handles Division */
-const division = () => {
-  console.log("Division");
-};
-
-/*
- * =============================================================================================
- */
-/* Handles multiplication */
-const multiplication = () => {
-  console.log("multiplication");
-};
-
-/*
- * =============================================================================================
- */
-/* Handles addition */
-const addition = () => {
-  console.log("Addition");
-};
-
-/*
- * =============================================================================================
- */
-/* Handles subtraction */
-const subtraction = () => {
-  console.log("Subtraction");
 };
