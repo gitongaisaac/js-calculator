@@ -119,7 +119,7 @@ const bracket_slicer = () => {
 
   /* Loops the array from indexOfClose (loops in reverse), identifies the last Index Of open bracket,
    * saves it as indexOfOpen and breaks the loop */
-  for (let i = indexOfClose; i >= 0; i--) {
+  for (let i = indexOfClose; i > 0; i--) {
     if (values[i] === "(") {
       indexOfOpen = values.lastIndexOf(values[i]);
       break;
@@ -129,7 +129,7 @@ const bracket_slicer = () => {
   /* Loops the array from indexOfOpen (loops in reverse): to find out if there were any elements to be multiplied by the contents in the
    * bracket, finds the first sign of operation from indexOfOpen and slices the elements from that sign to indexOfOpen */
   let indexOfSign;
-  for (let i = indexOfOpen - 1; i >= 0; i--) {
+  for (let i = indexOfOpen - 1; i > 0; i--) {
     if (
       values[i] === "÷" ||
       values[i] === "+" ||
