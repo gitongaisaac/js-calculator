@@ -1,10 +1,4 @@
-/* Import modules */
-import {
-  divideSymbolIdentifier,
-  multiplySymbolIdentifier,
-  addSymbolIndetifier,
-  subtractSymbolIdentifier,
-} from "./modules/symbol-identifier";
+import * as SymbolIdentifiers from "./modules/symbol-identifiers";
 
 /* Access the buttons on the html file */
 const button = document.querySelector(".buttons");
@@ -16,6 +10,8 @@ const operands = document.querySelectorAll(".operand");
  * =============================================================================================
  */
 /* Stores the elements pressed on the calculator interface */
+const store = () => {};
+
 const values = [];
 
 /*
@@ -67,6 +63,8 @@ const operation_assigner = () => {
     if (values[i] === "(") {
       bracket_slicer();
       break;
+    } else {
+      operations();
     }
   }
 };
@@ -147,6 +145,8 @@ const bracket_slicer = () => {
  */
 /* Does calculations on the elements in the bracket, it accepts two parameters passed from the bracket_slicer()
  * function, the new values and the outer digits of the bracket */
-const bracket_operations = (problem, outerDigits) => {
-  operation_slicer(problem);
+const bracket_operations = (problem, outerDigits) => {};
+
+const operations = () => {
+  console.log(values);
 };

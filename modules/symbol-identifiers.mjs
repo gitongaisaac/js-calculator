@@ -1,4 +1,3 @@
-/* import modules */
 import { sliceStart, sliceEnd } from "./slice-range";
 
 /* identifies the divide sign and returns the slice start and slice end of the operation containing the divide sign.
