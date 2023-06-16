@@ -3,8 +3,6 @@ import { sliceStart, sliceEnd } from "./slice-range.js";
 /* identifies the divide sign and returns the slice start and slice end of the operation containing the divide sign.
  * Accepts 1 parameter and implements the functions sliceStart and sliceEnd to return the slice start and slice end */
 const divideSymbolIdentifier = (problem) => {
-  // const problem = ["3", "÷", "4", "5", "+", "9", "0"];
-
   let indexOfDivide, indexOfStart, indexOfEnd;
 
   for (let i = 0; i < problem.length; i++) {
@@ -19,11 +17,6 @@ const divideSymbolIdentifier = (problem) => {
 
   return [indexOfStart, indexOfEnd];
 };
-
-const [indexOfStart, indexOfEnd] = divideSymbolIdentifier();
-
-console.log(`Index of start is ${indexOfStart}`);
-console.log(`Index of end is ${indexOfEnd}`);
 
 /*
  * =============================================================================================

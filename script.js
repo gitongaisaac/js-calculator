@@ -1,4 +1,5 @@
 import * as SymbolIdentifiers from "./modules/symbol-identifiers.js";
+import slicer from "./modules/slicer.js";
 
 /* Access the buttons on the html file */
 const button = document.querySelector(".buttons");
@@ -144,13 +145,17 @@ const bracket_slicer = () => {
 /* Does calculations on the elements in the bracket, it accepts two parameters passed from the bracket_slicer()
  * function, the new values and the outer digits of the bracket */
 const bracket_operations = (problem, outerDigits) => {
+  console.log(outerDigits);
+  console.log(problem);
+
   const [indexOfStart, indexOfEnd] =
     SymbolIdentifiers.divideSymbolIdentifier(problem);
 
-  console.log(indexOfStart);
-  console.log(indexOfEnd);
+  const newProblem = slicer(problem, indexOfStart, indexOfEnd);
+
+  console.log(newProblem);
 };
 
 const operations = () => {
-  console.log(values);
+  // console.log(values);
 };
