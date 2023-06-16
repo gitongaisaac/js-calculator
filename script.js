@@ -1,5 +1,5 @@
-import * as SymbolIdentifiers from "./modules/symbol-identifiers.js";
-import slicer from "./modules/slicer.js";
+import * as SymbolIdentifiers from "./modules/symbol-identifiers.mjs";
+import slicer from "./modules/slicer.mjs";
 
 /* Access the buttons on the html file */
 const button = document.querySelector(".buttons");

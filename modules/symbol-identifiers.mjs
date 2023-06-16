@@ -1,4 +1,4 @@
-import { sliceStart, sliceEnd } from "./slice-range.js";
+import { sliceStart, sliceEnd } from "./slice-range.mjs";
 
 /* identifies the divide sign and returns the slice start and slice end of the operation containing the divide sign.
  * Accepts 1 parameter and implements the functions sliceStart and sliceEnd to return the slice start and slice end */
