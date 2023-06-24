@@ -1,11 +1,13 @@
 import * as SymbolIdentifiers from "./modules/symbol-identifiers.mjs";
 import slicer from "./modules/slicer.mjs";
+import clearField from "./modules/clear-field.mjs";
 
 /* Access the buttons on the html file */
 const button = document.querySelector(".buttons");
 
 /* Access the signs of operation (×, +, −, ÷) */
 const operands = document.querySelectorAll(".operand");
+const inp = document.getElementById("ans");
 
 /*
  * =============================================================================================
@@ -45,11 +47,25 @@ const click = (e) => {
   }
 };
 
+const input = (e) => {
+  // values.push(toString(inp.value));
+  const value = e.target.value;
+  console.log(inp.value);
+  values.push(inp.value);
+
+  console.log(values);
+};
+
+console.log(inp);
+
 /*
  * =============================================================================================
  */
 /* An event listener listens to a click event */
 button.addEventListener("click", click);
+
+inp.addEventListener("input", input);
+console.log(inp.value);
 
 /*
  * =============================================================================================
