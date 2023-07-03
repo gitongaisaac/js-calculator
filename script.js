@@ -18,54 +18,11 @@ const values = [];
 /*
  * =============================================================================================
  */
-/* This function is passed to the event listener, takes the events target inner text and appends it to the array above (values) */
-const click = (e) => {
-  /* Check if the events target has a class of btn */
-  if (e.target.classList.contains("btn")) {
-    const input = e.target.innerText;
-
-    let problem;
-    if (e.target.classList.contains("operand")) {
-      // values.push(" ", e.target.innerText, " ");
-    }
-
-    /* Prevents the push of values that are not to be performed calculations on such as the equal sighn.
-     * This values have a class of pull */
-    if (!e.target.classList.contains("pull")) {
-      values.push(input);
-
-      problem = document.getElementById("ans").value = values[0];
-      for (let i = 1; i < values.length; i++) {
-        document.getElementById("ans").value = problem += values[i];
-      }
-    }
-
-    /* Calls the bracket_indetifier function to start the calculations after the equls sign is hit */
-    if (e.target.classList.contains("equals")) {
-      operation_assigner();
-    }
-  }
-};
-
-const input = (e) => {
-  // values.push(toString(inp.value));
-  const value = e.target.value;
-  console.log(inp.value);
-  values.push(inp.value);
-
-  console.log(values);
-};
-
 console.log(inp);
-
-/*
- * =============================================================================================
- */
-/* An event listener listens to a click event */
-button.addEventListener("click", click);
-
-inp.addEventListener("input", input);
-console.log(inp.value);
+inp.addEventListener("input", (e) => {
+  console.log(true);
+  console.log(inp.value);
+});
 
 /*
  * =============================================================================================
