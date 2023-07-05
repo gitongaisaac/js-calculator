@@ -19,10 +19,9 @@
 //   }
 // });
 
-const values = [2323233];
-const new_values = values.split();
-console.log(new_values);
+const values = "39482033";
 
-// values.forEach((value) => {
-//   console.log(value);
-// });
+for (let i = 0; i < values.length; i++) {
+  const element = values[i];
+  console.log(`"${values[i]}"`);
+}

@@ -13,31 +13,36 @@ const inp = document.getElementById("ans");
  * =============================================================================================
  */
 /* Stores the elements pressed on the calculator interface */
-const values = [];
+// const values = [];
+let values;
 
 /*
  * =============================================================================================
  */
-console.log(inp);
-console.log(inp.value);
 inp.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
-    console.log(true);
-    values.push(inp.value);
+    values = inp.value;
+    values = values.split("");
     console.log(values);
   }
 });
 
 button.addEventListener("click", (e) => {
+  /* Makes sure that the click is comming from a button and not any other place */
   if (e.target.classList.contains("btn")) {
     const input = e.target.innerText;
 
-    inp.value += input;
-    console.log(inp.value);
-
-    /* Prevents the push of values that are not to be performed calculations on such as the equal sighn.
+    /* Prevents the push of values that are not to be performed calculations on such as the equal sign.
      * This values have a class of pull */
     if (!e.target.classList.contains("pull")) {
+      inp.value += input;
+      console.log(inp.value);
+    }
+
+    if (e.target.classList.contains("equals")) {
+      values = inp.value;
+      values = values.split("");
+      console.log(values);
     }
   }
 });
