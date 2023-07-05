@@ -19,9 +19,27 @@ const values = [];
  * =============================================================================================
  */
 console.log(inp);
-inp.addEventListener("input", (e) => {
-  console.log(true);
-  console.log(inp.value);
+console.log(inp.value);
+inp.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    console.log(true);
+    values.push(inp.value);
+    console.log(values);
+  }
+});
+
+button.addEventListener("click", (e) => {
+  if (e.target.classList.contains("btn")) {
+    const input = e.target.innerText;
+
+    inp.value += input;
+    console.log(inp.value);
+
+    /* Prevents the push of values that are not to be performed calculations on such as the equal sighn.
+     * This values have a class of pull */
+    if (!e.target.classList.contains("pull")) {
+    }
+  }
 });
 
 /*

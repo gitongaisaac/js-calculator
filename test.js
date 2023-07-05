@@ -19,9 +19,10 @@
 //   }
 // });
 
-const values = ["2323", "3", ")", "+", "4"];
-console.log(values);
+const values = [2323233];
+const new_values = values.split();
+console.log(new_values);
 
-values.forEach((value) => {
-  console.log(value);
-});
+// values.forEach((value) => {
+//   console.log(value);
+// });
