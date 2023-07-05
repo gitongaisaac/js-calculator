@@ -19,33 +19,48 @@ let values;
 /*
  * =============================================================================================
  */
-inp.addEventListener("keypress", (e) => {
+/* Invoked when an input is made on the calculator interface input field. This function records the values 
+entered through the mechanical keyboard on the input variable above */
+const input = (e) => {
+  /* Ensures that the values in the input field are appended split into an array only when the key pressed is enter */
   if (e.key === "Enter") {
     values = inp.value;
     values = values.split("");
     console.log(values);
   }
-});
+};
 
-button.addEventListener("click", (e) => {
-  /* Makes sure that the click is comming from a button and not any other place */
+/* Invoked when a click is made on the calculator interface. */
+/* This function appends the values clicked from the calculator interface on to the input field and records 
+them on the input value above. */
+const click = (e) => {
+  /* Makes sure that the click is comming from a button and not any other place on the calculator interfce*/
   if (e.target.classList.contains("btn")) {
     const input = e.target.innerText;
 
-    /* Prevents the push of values that are not to be performed calculations on such as the equal sign.
+    /* Prevents appending values that are not to be performed calculations on or don't need to be displayed 
+    on the input field such as the equal sign.
      * This values have a class of pull */
     if (!e.target.classList.contains("pull")) {
       inp.value += input;
       console.log(inp.value);
     }
 
+    /* Ensures that the values in the input field are appended split into an array only when the button 
+    clicked is the equal sign */
     if (e.target.classList.contains("equals")) {
       values = inp.value;
       values = values.split("");
       console.log(values);
     }
   }
-});
+};
+
+/* Listens for key presses on the mechanical keyboard and invokes the input funcition */
+inp.addEventListener("keypress", input);
+
+/* Listens for clicks made on the caclulator interface and invokes the click function */
+button.addEventListener("click", click);
 
 /*
  * =============================================================================================
