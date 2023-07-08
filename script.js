@@ -3,7 +3,9 @@ import slicer from "./modules/slicer.mjs";
 import clearField from "./modules/clear-field.mjs";
 
 /* Access the buttons on the html file */
-const button = document.querySelector(".buttons");
+const btn = document.querySelector(".buttons");
+
+const nums = document.querySelectorAll(".num");
 
 /* Access the signs of operation (×, +, −, ÷) */
 const operands = document.querySelectorAll(".operand");
@@ -23,18 +25,29 @@ let values;
 entered through the mechanical keyboard on the input variable above */
 const input = (e) => {
   /* Ensures that the values in the input field are appended split into an array only when the key pressed is enter */
-  if (e.key === "Enter") {
-    values = inp.value;
-    values = values.split("");
-    console.log(values);
-  }
+  nums.forEach((num) => {
+    let number = num.innerText;
+    if (e.key === number) {
+      inp.disabled = false;
+      console.log(e.key);
+      if (e.key === "Enter") {
+        values = inp.value;
+        values = values.split("");
+        console.log(values);
+      }
+    } else {
+      // inp.disabled = true;
+      // input();
+    }
+  });
+  console.log(e);
 };
 
 /* Invoked when a click is made on the calculator interface. */
 /* This function appends the values clicked from the calculator interface on to the input field and records 
 them on the input value above. */
 const click = (e) => {
-  /* Makes sure that the click is comming from a button and not any other place on the calculator interfce*/
+  /* Makes sure that the click is comming from a button and not any other place on the calculator interfce */
   if (e.target.classList.contains("btn")) {
     const input = e.target.innerText;
 
@@ -56,11 +69,26 @@ const click = (e) => {
   }
 };
 
-/* Listens for key presses on the mechanical keyboard and invokes the input funcition */
+/* Listens for key presses on the mechanical keyboard and invokes the input function */
 inp.addEventListener("keypress", input);
 
+inp.addEventListener("keydown", (e) => {
+  console.log("key down");
+
+  if (e.key === "j") {
+    inp.disabled = true;
+  }
+});
+
+inp.addEventListener("keyup", (e) => {
+  console.log("key up");
+  if (e.key === "j") {
+    inp.disabled = false;
+  }
+});
+
 /* Listens for clicks made on the caclulator interface and invokes the click function */
-button.addEventListener("click", click);
+btn.addEventListener("click", click);
 
 /*
  * =============================================================================================
