@@ -24,51 +24,39 @@ let values;
 /* Invoked when an input is made on the calculator interface input field. This function records the values 
 entered through the mechanical keyboard on the input variable above */
 const input = (e) => {
-  const inputs = [
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    "(",
-    ")",
-    "%",
-    "+",
-    "-",
-    "/",
-    "*",
-  ];
+  const keyCode = e.keyCode;
 
-  /* Ensures that the values in the input field are appended split into an array only when the "Enter" key is pressed */
-  // inputs.forEach((input) => {
-  //   if (e.key == input || e.key === "Enter") {
-  //     if (e.key === "Enter") {
-  //       values = inp.value;
-  //       values = values.split("");
-  //       console.log(values);
-  //     }
-  //   } else {
-  //     e.preventDefault();
-  //   }
-  // });
-
-  inputs.forEach((input) => {
-    if (e.key == input) {
-      console.log(e.key);
-    } else {
-      e.preventDefault();
+  /* Ensures that the input values added to the input field are associated with mathematical operations ONLY.
+   * Uses the event key code to map out this keys.
+   * Numerics 0 to 9
+   * Special characters: %, *, (, ), /
+   * Mathematical signs: +, -, *
+   * and other keys such as delete, enter, backspace, and arrows to facilitate navigation */
+  /* Also ensures that the values in the input field are appended and split into an array only when the "Enter" key is pressed */
+  if (
+    (keyCode >= 48 && keyCode <= 57) || // Numerics 0 to 9, special characters, %, *, (, and )
+    keyCode === 8 || // Backspace
+    keyCode === 13 || // Enter
+    keyCode === 37 || // Left arrow
+    keyCode === 39 || // Right arrow
+    keyCode === 46 || // Delete
+    keyCode === 187 || // Plus (+)
+    keyCode === 189 || // Minus (-)
+    keyCode === 191 // Forward slash (/)
+  ) {
+    if (e.key === "Enter") {
+      values = inp.value;
+      values = values.split("");
+      console.log(values);
     }
-  });
+  } else {
+    e.preventDefault();
+  }
 
   // console.log(e);
 };
 
-/* Invoked when a click is made on the calculator interface. */
+/* Invoked when a click is made on the calculator interface. On the buttons. */
 /* This function appends the values clicked from the calculator interface on to the input field and records 
 them on the input value above. */
 const click = (e) => {
@@ -94,7 +82,7 @@ const click = (e) => {
 };
 
 /* Listens for key presses on the mechanical keyboard and invokes the input function */
-inp.addEventListener("keypress", input);
+inp.addEventListener("keydown", input);
 
 /* Listens for clicks made on the caclulator interface and invokes the click function */
 btn.addEventListener("click", click);
