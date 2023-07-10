@@ -18,10 +18,3 @@
 //     console.log(`The index is ${index}`);
 //   }
 // });
-
-const values = "39482033";
-
-for (let i = 0; i < values.length; i++) {
-  const element = values[i];
-  console.log(`"${values[i]}"`);
-}

@@ -24,23 +24,48 @@ let values;
 /* Invoked when an input is made on the calculator interface input field. This function records the values 
 entered through the mechanical keyboard on the input variable above */
 const input = (e) => {
-  /* Ensures that the values in the input field are appended split into an array only when the key pressed is enter */
-  nums.forEach((num) => {
-    let number = num.innerText;
-    if (e.key === number) {
-      inp.disabled = false;
+  const inputs = [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    "(",
+    ")",
+    "%",
+    "+",
+    "-",
+    "/",
+    "*",
+  ];
+
+  /* Ensures that the values in the input field are appended split into an array only when the "Enter" key is pressed */
+  // inputs.forEach((input) => {
+  //   if (e.key == input || e.key === "Enter") {
+  //     if (e.key === "Enter") {
+  //       values = inp.value;
+  //       values = values.split("");
+  //       console.log(values);
+  //     }
+  //   } else {
+  //     e.preventDefault();
+  //   }
+  // });
+
+  inputs.forEach((input) => {
+    if (e.key == input) {
       console.log(e.key);
-      if (e.key === "Enter") {
-        values = inp.value;
-        values = values.split("");
-        console.log(values);
-      }
     } else {
-      // inp.disabled = true;
-      // input();
+      e.preventDefault();
     }
   });
-  console.log(e);
+
+  // console.log(e);
 };
 
 /* Invoked when a click is made on the calculator interface. */
@@ -64,28 +89,12 @@ const click = (e) => {
     if (e.target.classList.contains("equals")) {
       values = inp.value;
       values = values.split("");
-      console.log(values);
     }
   }
 };
 
 /* Listens for key presses on the mechanical keyboard and invokes the input function */
 inp.addEventListener("keypress", input);
-
-inp.addEventListener("keydown", (e) => {
-  console.log("key down");
-
-  if (e.key === "j") {
-    inp.disabled = true;
-  }
-});
-
-inp.addEventListener("keyup", (e) => {
-  console.log("key up");
-  if (e.key === "j") {
-    inp.disabled = false;
-  }
-});
 
 /* Listens for clicks made on the caclulator interface and invokes the click function */
 btn.addEventListener("click", click);
