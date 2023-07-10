@@ -2,10 +2,11 @@ import * as SymbolIdentifiers from "./modules/symbol-identifiers.mjs";
 import slicer from "./modules/slicer.mjs";
 import clearField from "./modules/clear-field.mjs";
 
+/*
+ * =============================================================================================
+ */
 /* Access the buttons on the html file */
 const btn = document.querySelector(".buttons");
-
-const nums = document.querySelectorAll(".num");
 
 /* Access the signs of operation (×, +, −, ÷) */
 const operands = document.querySelectorAll(".operand");
@@ -15,7 +16,6 @@ const inp = document.getElementById("ans");
  * =============================================================================================
  */
 /* Stores the elements pressed on the calculator interface */
-// const values = [];
 let values;
 
 /*
@@ -31,8 +31,8 @@ const input = (e) => {
    * Numerics 0 to 9
    * Special characters: %, *, (, ), /
    * Mathematical signs: +, -, *
-   * and other keys such as delete, enter, backspace, and arrows to facilitate navigation */
-  /* Also ensures that the values in the input field are appended and split into an array only when the "Enter" key is pressed */
+   * and other keys such as delete, enter, backspace, and arrows to facilitate navigation.
+   * Also ensures that the values in the input field are appended and split into an array only when the "Enter" key is pressed */
   if (
     (keyCode >= 48 && keyCode <= 57) || // Numerics 0 to 9, special characters, %, *, (, and )
     keyCode === 8 || // Backspace
@@ -56,6 +56,9 @@ const input = (e) => {
   // console.log(e);
 };
 
+/*
+ * =============================================================================================
+ */
 /* Invoked when a click is made on the calculator interface. On the buttons. */
 /* This function appends the values clicked from the calculator interface on to the input field and records 
 them on the input value above. */
@@ -81,9 +84,15 @@ const click = (e) => {
   }
 };
 
+/*
+ * =============================================================================================
+ */
 /* Listens for key presses on the mechanical keyboard and invokes the input function */
 inp.addEventListener("keydown", input);
 
+/*
+ * =============================================================================================
+ */
 /* Listens for clicks made on the caclulator interface and invokes the click function */
 btn.addEventListener("click", click);
 
