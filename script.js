@@ -32,7 +32,8 @@ const input = (e) => {
    * Special characters: %, *, (, ), /
    * Mathematical signs: +, -, *
    * and other keys such as delete, enter, backspace, and arrows to facilitate navigation.
-   * Also ensures that the values in the input field are appended and split into an array only when the "Enter" key is pressed */
+   * Also ensures that the values in the input field are appended and split into an array only when the
+   * "Enter" key is pressed */
   if (
     (keyCode >= 48 && keyCode <= 57) || // Numerics 0 to 9, special characters, %, *, (, and )
     keyCode === 8 || // Backspace
@@ -48,6 +49,8 @@ const input = (e) => {
       values = inp.value;
       values = values.split("");
       console.log(values);
+
+      operation_assigner();
     }
   } else {
     e.preventDefault();
@@ -72,7 +75,7 @@ const click = (e) => {
      * This values have a class of pull */
     if (!e.target.classList.contains("pull")) {
       inp.value += input;
-      console.log(inp.value);
+      // console.log(inp.value);
     }
 
     /* Ensures that the values in the input field are appended split into an array only when the button 
@@ -80,6 +83,9 @@ const click = (e) => {
     if (e.target.classList.contains("equals")) {
       values = inp.value;
       values = values.split("");
+      console.log(values);
+
+      operation_assigner();
     }
   }
 };
