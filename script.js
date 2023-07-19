@@ -20,57 +20,67 @@ const screen = document.querySelector(".screen");
 /* Stores the elements pressed on the calculator interface */
 let values;
 
-const autoFocus = () => {
-  const hasFocus = document.activeElement === inp;
-  console.log(hasFocus);
-
-  if (hasFocus) {
+/* Invoked when the a click is recorded on the dom.
+ * Helps to show if the focus is on the input field and ready for input.
+ * If a click is recorded and the target is a button or the input field the input field border is blue and grey otherwise. */
+const dom_click = (e) => {
+  if (
+    e.target.classList.contains("btn") ||
+    e.target.classList.contains("ans")
+  ) {
     screen.style.border = "1px solid #047aed";
-    console.log("input has focus");
   } else {
-    screen.style.border = "1px solid #94a3b8";
+    screen.style.border = "1px solid var(--grey-400)";
   }
 };
 
 /*
  * =============================================================================================
  */
+/* Records the position of the caret */
+let position = 0;
+
 /* Invoked when an input is made on the calculator interface input field. This function records the values 
 entered through the mechanical keyboard on the input variable above */
 const input = (e) => {
   const keyCode = e.keyCode;
-  autoFocus();
-  /* Ensures that the input values added to the input field are associated with mathematical operations ONLY.
-   * Uses the event key code to map out this keys.
-   * Numerics 0 to 9
-   * Special characters: %, *, (, ), /
-   * Mathematical signs: +, -, *
-   * and other keys such as delete, enter, backspace, and arrows to facilitate navigation.
-   * Also ensures that the values in the input field are appended and split into an array only when the
-   * "Enter" key is pressed */
-  if (
-    (keyCode >= 48 && keyCode <= 57) || // Numerics 0 to 9, special characters, %, *, (, and )
-    keyCode === 8 || // Backspace
-    keyCode === 13 || // Enter
-    keyCode === 37 || // Left arrow
-    keyCode === 39 || // Right arrow
-    keyCode === 46 || // Delete
-    keyCode === 187 || // Plus (+)
-    keyCode === 189 || // Minus (-)
-    keyCode === 191 // Forward slash (/)
-  ) {
-    if (e.key === "Enter") {
-      values = inp.value;
-      values = values.split("");
-      console.log(values);
 
-      operation_assigner();
+  /* Ensures that the caret is always at the end in order for input to always occur at the end. */
+  if (inp.selectionStart >= position) {
+    position = inp.selectionStart;
+
+    /* Ensures that the input values added to the input field are associated with mathematical operations ONLY.
+     * Uses the event key code to map out this keys.
+     * Numerics 0 to 9
+     * Special characters: %, *, (, ), /
+     * Mathematical signs: +, -, *
+     * and other keys such as delete, enter, backspace, and arrows to facilitate navigation.
+     * Also ensures that the values in the input field are appended and split into an array only when the
+     * "Enter" key is pressed */
+    if (
+      (keyCode >= 48 && keyCode <= 57) || // Numerics 0 to 9, special characters, %, *, (, and )
+      keyCode === 8 || // Backspace
+      keyCode === 13 || // Enter
+      keyCode === 37 || // Left arrow
+      keyCode === 39 || // Right arrow
+      keyCode === 46 || // Delete
+      keyCode === 187 || // Plus (+)
+      keyCode === 189 || // Minus (-)
+      keyCode === 191 // Forward slash (/)
+    ) {
+      if (e.key === "Enter") {
+        values = inp.value;
+        values = values.split("");
+        console.log(values);
+
+        operation_assigner();
+      }
+    } else {
+      e.preventDefault();
     }
   } else {
-    e.preventDefault();
+    inp.selectionStart = position;
   }
-
-  // console.log(e);
 };
 
 /*
@@ -80,10 +90,6 @@ const input = (e) => {
 /* This function appends the values clicked from the calculator interface on to the input field and records 
 them on the input value above. */
 const click = (e) => {
-  /* Keeps the foucus on the input field */
-  inp.focus();
-  autoFocus();
-
   /* Makes sure that the click is comming from a button and not any other place on the calculator interfce */
   if (e.target.classList.contains("btn")) {
     const input = e.target.innerText;
@@ -106,16 +112,10 @@ const click = (e) => {
       operation_assigner();
     }
   }
-};
 
-/*
- * =============================================================================================
- */
-/* Auto focuses the input field when the DOM is loaded */
-document.addEventListener("DOMContentLoaded", (e) => {
+  /* Keeps the foucus on the input field */
   inp.focus();
-  // screen_style();
-});
+};
 
 /*
  * =============================================================================================
@@ -128,6 +128,8 @@ inp.addEventListener("keydown", input);
  */
 /* Listens for clicks made on the caclulator interface and invokes the click function */
 btn.addEventListener("click", click);
+
+document.addEventListener("click", dom_click);
 
 /*
  * =============================================================================================
