@@ -38,7 +38,7 @@ const dom_click = (e) => {
  * =============================================================================================
  */
 /* Records the position of the caret */
-let position = 0;
+let position = -1;
 
 /* Invoked when an input is made on the calculator interface input field. This function records the values 
 entered through the mechanical keyboard on the input variable above */
@@ -46,8 +46,10 @@ const input = (e) => {
   const keyCode = e.keyCode;
 
   /* Ensures that the caret is always at the end in order for input to always occur at the end. */
-  if (inp.selectionStart >= position) {
-    position = inp.selectionStart;
+  if (inp.selectionStart > position) {
+    position = inp.selectionStart + 10;
+    // console.log(inp.selectionStart);
+    // console.log(position);
 
     /* Ensures that the input values added to the input field are associated with mathematical operations ONLY.
      * Uses the event key code to map out this keys.
@@ -79,7 +81,9 @@ const input = (e) => {
       e.preventDefault();
     }
   } else {
-    inp.selectionStart = position;
+    inp.selectionStart = position + 10;
+    // console.log(position);
+    // console.log(inp.selectionStart);
   }
 };
 
@@ -93,6 +97,7 @@ const click = (e) => {
   /* Makes sure that the click is comming from a button and not any other place on the calculator interfce */
   if (e.target.classList.contains("btn")) {
     const input = e.target.innerText;
+    // const input = e.target.innerText + 1;
 
     /* Prevents appending values that are not to be performed calculations on or don't need to be displayed 
     on the input field such as the equal sign.
