@@ -45,11 +45,13 @@ entered through the mechanical keyboard on the input variable above */
 const input = (e) => {
   const keyCode = e.keyCode;
 
+  if (e.key === "Enter") {
+    console.log("Enter pressed");
+  }
+
   /* Ensures that the caret is always at the end in order for input to always occur at the end. */
   if (inp.selectionStart > position) {
     position = inp.selectionStart + 10;
-    // console.log(inp.selectionStart);
-    // console.log(position);
 
     /* Ensures that the input values added to the input field are associated with mathematical operations ONLY.
      * Uses the event key code to map out this keys.
@@ -59,6 +61,7 @@ const input = (e) => {
      * and other keys such as delete, enter, backspace, and arrows to facilitate navigation.
      * Also ensures that the values in the input field are appended and split into an array only when the
      * "Enter" key is pressed */
+
     if (
       (keyCode >= 48 && keyCode <= 57) || // Numerics 0 to 9, special characters, %, *, (, and )
       keyCode === 8 || // Backspace
@@ -70,7 +73,8 @@ const input = (e) => {
       keyCode === 189 || // Minus (-)
       keyCode === 191 // Forward slash (/)
     ) {
-      if (e.key === "Enter") {
+      if (keyCode === 13) {
+        console.log("Enter pressed");
         values = inp.value;
         values = values.split("");
         console.log(values);
@@ -82,9 +86,9 @@ const input = (e) => {
     }
   } else {
     inp.selectionStart = position + 10;
-    // console.log(position);
-    // console.log(inp.selectionStart);
   }
+
+  // console.log(e);
 };
 
 /*
@@ -112,28 +116,31 @@ const click = (e) => {
     if (e.target.classList.contains("equals")) {
       values = inp.value;
       values = values.split("");
-      console.log(values);
 
       operation_assigner();
     }
   }
 
-  /* Keeps the foucus on the input field */
+  /* Keep foucus on the input field */
   inp.focus();
 };
 
 /*
  * =============================================================================================
  */
-/* Listens for key presses on the mechanical keyboard and invokes the input function */
+/* Listen for key presses on the mechanical keyboard and invokes the input function */
 inp.addEventListener("keydown", input);
 
 /*
  * =============================================================================================
  */
-/* Listens for clicks made on the caclulator interface and invokes the click function */
+/* Listen for clicks made on the caclulator interface and invokes the click function */
 btn.addEventListener("click", click);
 
+/*
+ * =============================================================================================
+ */
+/* Listen for clicks on the dom */
 document.addEventListener("click", dom_click);
 
 /*
@@ -211,6 +218,7 @@ const bracket_slicer = () => {
   /* Checks if the length of the outerDigits array is 0, if yes, the it pushes a 1 in string form else nothing happens */
   if (outerDigits.length === 0) {
     outerDigits.push("1");
+    console.log(true);
   } else {
     console.log(false);
   }
@@ -222,6 +230,9 @@ const bracket_slicer = () => {
   // console.log(newValues);
 
   bracket_operations(newValues, outerDigits);
+
+  console.log(newValues);
+  console.log(outerDigits);
 };
 
 /*
